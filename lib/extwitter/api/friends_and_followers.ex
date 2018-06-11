@@ -31,6 +31,12 @@ defmodule ExTwitter.API.FriendsAndFollowers do
     |> ExTwitter.Parser.parse_user
   end
 
+  def friendships_update(id, options \\ []) do
+    params = ExTwitter.Parser.parse_request_params(get_id_option(id) ++ options)
+    request(:post, "1.1/friendships/update.json", params)
+    |> ExTwitter.Parser.parse_user
+  end
+
   def unfollow(id) do
     params = ExTwitter.Parser.parse_request_params(get_id_option(id))
     request(:post, "1.1/friendships/destroy.json", params)
